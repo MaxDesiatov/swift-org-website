@@ -11,14 +11,14 @@ title: Install Swift
   <li class="grid-level-1">
     <h3>Xcode</h3>
     <p class="description">
-      Download the latest version of Xcode, which is regularly refreshed with the latest Swift toolchain.
+      Download the latest version of Xcode, which is regularly refreshed with the latest Swift toolchain. Use this when targeting Apple platforms.
     </p>
     <a href="https://developer.apple.com/xcode/" class="cta-secondary external">Install Xcode</a>
   </li>
   <li class="grid-level-1">
     <h3>Package Installer</h3>
     <p class="description">
-      Toolchain package installer (.pkg)
+      Toolchain package installer (.pkg). Use this when cross-compiling to Linux, Wasm, and embedded platforms.
     </p>
     <a href="https://download.swift.org/{{ site.data.builds.swift_releases.last.tag | downcase }}/xcode/{{ site.data.builds.swift_releases.last.tag }}/{{ site.data.builds.swift_releases.last.tag }}-osx.pkg" class="cta-secondary">Download Toolchain</a>
     <a href="/install/macos/package_installer" class="cta-secondary">Instructions</a>
