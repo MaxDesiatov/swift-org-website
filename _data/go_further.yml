@@ -33,4 +33,11 @@
   thumbnail_url: #TBD
   release_date: 2023-11-08
   external: false
-  
+- title: "Cross-Compiling with Swift SDKs"
+  description: "Learn how to write and build code on any host platform targeting Linux or WebAssembly."
+  content_type: article
+  content_url: /getting-started/cross-compilation/
+  thumbnail_url: #TBD
+  release_date: 2025-01-30
+  external: false
+
