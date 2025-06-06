@@ -100,6 +100,5 @@ allowing the toolchain to produce Wasm binaries that are multiple orders of magn
 with the `swift sdk install` command is tailored specifically for Embedded Swift. A subset of Swift Concurrency is also supported in this mode
 thanks to the functionality provided by WASI.
 
-To build with Embedded Swift SDK, pass its ID as noted in `swift sdk list` output (which has an `-embedded` suffix) in the `--swift-sdk` option. You also have to pass `-c release`
-to `swift build` and `swift run` to enable optimizations required for Embedded Swift.
+To build with Embedded Swift SDK, pass its ID as noted in `swift sdk list` output (which has an `-embedded` suffix) in the `--swift-sdk` option.
 
