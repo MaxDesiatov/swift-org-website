@@ -39,27 +39,30 @@ Potential mentors, please feel free to propose project ideas to this page direct
 You can browse previous year's project ideas here: [2025](https://www.swift.org/gsoc2025/), [2024](https://www.swift.org/gsoc2024/), [2023](https://www.swift.org/gsoc2023/), [2022](https://www.swift.org/gsoc2022/), [2021](https://www.swift.org/gsoc2021/), [2020](https://www.swift.org/gsoc2020/), [2019](https://www.swift.org/gsoc2019/).
 
 
-### Re-implement property wrappers with macros
 
-**Project size**: 350 hours
-**Estimated difficulty**: Intermediate
+### Example project name
+
+**Project size**: N hours
+
+**Estimated difficulty**: ???
+
 **Recommended skills**
-- Proficiency in Swift and C++
+
+- Basic proficiency in Swift.
+- ...
 
 **Description**
 
-[Property wrappers](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0258-property-wrappers.md) feature is currently implemented purely within the compiler but with the addition of [Swift Macros](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0389-attached-macros.md) and [init accessors](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0400-init-accessors.md) it's now possible to remove all ad-hoc code from the compiler and implement property wrappers by using existing features.
-
-This work would remove a lot of property wrapper-specific code throughout the compiler - parsing, semantic analysis, SIL generation etc. which brings great benefits by facilitating code reuse, cleaning up the codebase and potentially fixing implementation corner cases. Macros and init accessors in their current state might not be sufficient to cover all of the property wrapper use scenarios, so the project is most likely going to require improving and expanding the aforementioned features as well.
-
+Description of the project goes here.
 
 **Expected outcomes/benefits/deliverables**
 
-The outcome of this project is the complete removal of all property wrappers-specific code from the compiler. This benefits the Swift project in multiple areas - stability, testability and code health.
+- Expected deliverables of the project go here
 
 **Potential mentors**
 
-- [Pavel Yaskevich](https://github.com/xedin)
+- Mentor name and link to their github
+
 
 ### Qualified name lookup for swift-syntax
 
@@ -116,29 +119,36 @@ The goal of this project is to investigate data structures we might use to track
 
 - [Alastair Houghton](https://github.com/al45tair)
 
----
+### WebAssembly Reference Types (`externref`) Support in Swift Compiler
 
+**Project size**: 200-300 hours
 
-### Example project name
-
-**Project size**: N hours
-
-**Estimated difficulty**: ???
+**Estimated difficulty**: Advanced
 
 **Recommended skills**
 
-- Basic proficiency in Swift.
-- ...
+- Proficiency in C/C++, Swift, and WebAssembly;
+- Basic understanding of SIL and LLVM IR.
 
 **Description**
 
-Description of the project goes here.
+Core WebAssembly supports primitive scalar and vector types, such as `i32`/`i64`/`f32`/`f64`, and `v128`. For bridging high-level types that have reference semantics, WebAssembly host environment usually maintains an ad-hoc table that maps indices in this table to references stored in it.
 
-**Expected outcomes/benefits/deliverables**
+For example, to bridge a garbage-collected JavaScript value to WebAssembly, a naive implementation can allocate a JavaScript array that holds a reference to this value, while an index in this array is passed to Swift compiled to Wasm that it can operate on. While these ad-hoc tables are the primary means to interoperate with JavaScript from Swift, they're not optimal from binary size and performance perspective.
 
-- Expected deliverables of the project go here
+[WebAssembly standard defines a new built-in `externref` type](https://www.w3.org/TR/2025/CRD-wasm-core-2-20250616/#reference-types①) that can be stored in built-in WebAssembly tables and passed around on WebAssembly stack. It can't be stored in Wasm linear memory, which only supports basic numeric types, integer indices in the built-in table are used for that instead. To support this, LLVM represents `externref` as a pointer in a reserved address space, while Clang at a higher level represents this as a built-in `__externref_t` type lowered to LLVM pointer type in the reserved address space.
+
+We're looking for a prototype of an experimental feature in the Swift compiler that allows easier interoperability with C and C++ code that uses `__externref_t` values. As a stretch goal, Swift standard library should facilitate easier interop with host environments for [WebAssembly embedding](https://www.w3.org/TR/2025/CRD-wasm-core-2-20250616/#a1-embedding).
+
+**Expected outcome/benefits/deliverables**
+
+- `WasmExternref` experimental feature that enables `WasmExternref` type in the Swift standard library;
+- Lowering of operations on this type to [correct LLVM IR address space](https://discourse.llvm.org/t/rfc-webassembly-reference-types-in-clang/66939);
+- Type checker semantics that corresponds to [existing `__externref_t` type in Clang](https://github.com/swiftlang/swift-for-wasm-examples/blob/main/DOMRefTypes/Sources/externref/bridge.c);
+- (Stretch) Availability of Wasm `externref` table builtins in the Swift standard library for future use corresponding to `__builtin_wasm_table_*` available in Clang
+- (Stretch) `WasmExternrefIndex` for wrapping `externref` table indices in types available in common Swift values address space. 
 
 **Potential mentors**
 
-- Mentor name and link to their github
+- [Max Desiatov](https://github.com/MaxDesiatov)
 
